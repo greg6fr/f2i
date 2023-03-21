@@ -1,19 +1,18 @@
 <?php
+
+require('database.php');
+require('verification.php');
+
+$db=new Database();
+$db->connectDB();
+
 $tarray=array();
 
- function validator($nom,$min,$max,$tarray) {
-    if (strlen($nom)<$min || strlen($nom)>$max) {
-        # code...
-        $tarray=array_push($tarray,$nom);
-        echo "Votre nom ne respecte pas le caractere autorisé ";
-        return $tarray;
-    } else {
-       
-        echo "Bravo votre nom est bien enregistré";
-        return $tarray;
-    }
- }
+$verification = new Verification();
 
- validator($_GET['nom'],3,50,$tarray);
+$verif=$verification->validator($_GET['nom'],3,50,$tarray,'Respecter les conditions');
+ 
+//$retour=$verif->getError();
+ 
 
 ?>
